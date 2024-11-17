@@ -1,0 +1,61 @@
+import matplotlib.pyplot as plt
+
+# Data from the training results
+epochs = list(range(1, 21))
+loss = [
+    95.3532, 76.8372, 69.9428, 64.4249, 52.8486,
+    46.3094, 38.2617, 37.4804, 33.5237, 28.5170,
+    27.0142, 27.4564, 23.7961, 24.6167, 22.2604,
+    20.1899, 17.3425, 16.5249, 16.6140, 17.0187
+]
+val_loss = [
+    124.3362, 127.6357, 91.1531, 124.0287, 109.1004,
+    85.1038, 92.0900, 80.0016, 83.2579, 83.5056,
+    92.1290, 185.6307, 92.3429, 92.4542, 82.5822,
+    86.3830, 78.4369, 81.7731, 80.9727, 93.4115
+]
+mae = [
+    7.4339, 6.6707, 6.3992, 6.1407, 5.5913,
+    5.2223, 4.7951, 4.7402, 4.4271, 4.1411,
+    3.9700, 4.0428, 3.7407, 3.8116, 3.6746,
+    3.4430, 3.2205, 3.1295, 3.1421, 3.1785
+]
+val_mae = [
+    8.4921, 8.6035, 7.4454, 8.3481, 8.2192,
+    7.0332, 7.3359, 6.7239, 6.8529, 6.9629,
+    7.1866, 11.4591, 7.2467, 7.1401, 6.7841,
+    6.8304, 6.6419, 6.7226, 6.9908, 7.6512
+]
+
+# Create subplots
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 12))
+
+# Plotting the loss
+ax1.plot(epochs, loss, label='Training Loss', marker='o')
+ax1.plot(epochs, val_loss, label='Validation Loss', marker='o')
+ax1.set_title('Training and Validation Loss Over Epochs')
+ax1.set_xlabel('Epochs')
+ax1.set_ylabel('Loss')
+ax1.set_xticks(epochs)  # Set x-ticks to be the epoch numbers
+ax1.legend()
+ax1.grid()
+
+# Plotting the MAE
+ax2.plot(epochs, mae, label='Training MAE', marker='o')
+ax2.plot(epochs, val_mae, label='Validation MAE', marker='o')
+ax2.set_title('Training and Validation MAE Over Epochs')
+ax2.set_xlabel('Epochs')
+ax2.set_ylabel('Mean Absolute Error (MAE)')
+ax2.set_xticks(epochs)  # Set x-ticks to be the epoch numbers
+ax2.legend()
+ax2.grid()
+
+# Adjust layout
+plt.tight_layout()
+plt.show()
+Epoch 18/20
+356/356 - 35s - loss: 16.5249 - mae: 3.1295 - val_loss: 81.7731 - val_mae: 6.7226
+Epoch 19/20
+356/356 - 35s - loss: 16.6140 - mae: 3.1421 - val_loss: 80.9727 - val_mae: 6.9908
+Epoch 20/20
+356/356 - 35s - loss: 17.0187 - mae: 3.1785 - val_loss: 93.4115 - val_mae: 7.6512
