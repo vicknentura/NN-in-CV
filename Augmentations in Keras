@@ -51,3 +51,6 @@ for i in range(16):
     plt.yticks([])
 plt.tight_layout()
 plt.show()
+
+
+https://vijayabhaskar96.medium.com/tutorial-image-classification-with-keras-flow-from-directory-and-generators-95f75ebe5720
