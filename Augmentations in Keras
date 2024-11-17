@@ -1,0 +1,53 @@
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+import matplotlib.pyplot as plt
+
+# Create the training data generator with augmentations
+train_datagen = ImageDataGenerator(
+    validation_split=0.25,
+    rescale=1./255,
+    horizontal_flip=True,       # Horizontal reflections
+    vertical_flip=True,         # Vertical reflections
+    rotation_range=90,          # Rotations up to 90 degrees
+    width_shift_range=0.2,      # Horizontal shifting (up to 20%)
+    height_shift_range=0.2,     # Vertical shifting (up to 20%)
+)
+
+# Create the training data generator
+train_datagen_flow = train_datagen.flow_from_directory(
+    '/datasets/fruits_small/',
+    target_size=(150, 150),
+    batch_size=16,
+    class_mode='sparse',
+    subset='training',
+    seed=12345
+)
+
+# Create the validation data generator without augmentations
+validation_datagen = ImageDataGenerator(
+    validation_split=0.25,
+    rescale=1./255
+)
+
+# Create the validation data generator
+val_datagen_flow = validation_datagen.flow_from_directory(
+    '/datasets/fruits_small/',
+    target_size=(150, 150),
+    batch_size=16,
+    class_mode='sparse',
+    subset='validation',
+    seed=12345
+)
+
+# Get the first batch of training data
+features, target = next(train_datagen_flow)
+
+# Display 16 images from the first batch
+fig = plt.figure(figsize=(10, 10))
+for i in range(16):
+    fig.add_subplot(4, 4, i + 1)
+    plt.imshow(features[i])
+    # Remove axes and place the images closer to one another for a more compact output
+    plt.xticks([])
+    plt.yticks([])
+plt.tight_layout()
+plt.show()
